@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Fitform Rewards V2: campaña temporal de lealtad con 60 días para acumular y 30 días para redimir." />
+  <title>Fitform Rewards · V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0b0b0b;
+      --line: rgba(255,255,255,.15);
+      --soft-line: rgba(255,255,255,.08);
+      --text: #fff;
+      --muted: #a7a7a7;
+      --dim: #676767;
+      --teal: #295c5f;
+      --green: #c7f7df;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--bg); color: var(--text); }
+    body {
+      margin: 0;
+      font-family: Montserrat, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 88% 0%, rgba(255,255,255,.13), transparent 28rem),
+        radial-gradient(circle at 0% 38%, rgba(41,92,95,.18), transparent 30rem),
+        var(--bg);
+    }
+    main { max-width: 1320px; margin: auto; padding: 28px 5vw 64px; }
+    h1, h2, h3, p { margin: 0; }
+    button { font: inherit; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); }
+    .brand img { width: 26px; height: 26px; object-fit: cover; }
+    .hero { min-height: 485px; display: grid; align-content: center; position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
+    .hero::after { content: "10+1"; position: absolute; right: -1vw; bottom: -3vw; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.11); font-size: clamp(150px, 27vw, 380px); font-weight: 900; letter-spacing: -.13em; line-height: .72; pointer-events: none; }
+    .eyebrow { position: relative; z-index: 1; margin-bottom: 20px; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { position: relative; z-index: 1; max-width: 780px; font-size: clamp(66px, 12vw, 168px); line-height: .79; letter-spacing: -.1em; text-transform: uppercase; }
+    h1 span { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.86); text-shadow: 0 0 24px rgba(255,255,255,.18); }
+    .hero-copy { position: relative; z-index: 1; max-width: 560px; margin-top: 32px; color: var(--muted); font-size: clamp(14px, 1.6vw, 19px); font-weight: 600; line-height: 1.45; }
+    .hero-actions { position: relative; z-index: 1; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border: 1px solid var(--line); color: var(--text); background: transparent; cursor: pointer; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; transition: background .2s, color .2s, border-color .2s; }
+    .button:hover, .button:focus-visible { border-color: var(--text); background: var(--text); color: var(--bg); outline: none; }
+    section { padding: 68px 0; border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 32px; }
+    h2 { font-size: clamp(30px, 5vw, 62px); line-height: .86; letter-spacing: -.075em; text-transform: uppercase; }
+    h3 { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .caption { max-width: 390px; color: var(--muted); font-size: 13px; font-weight: 600; line-height: 1.55; text-align: right; }
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; }
+    .metric { min-height: 145px; padding: 20px 0; border-top: 2px solid var(--text); }
+    .metric b { display: block; font-size: clamp(38px, 5vw, 70px); font-weight: 900; letter-spacing: -.09em; line-height: .86; }
+    .metric span { display: block; margin-top: 16px; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .1em; line-height: 1.4; text-transform: uppercase; }
+    .split { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: clamp(36px, 7vw, 110px); align-items: start; }
+    .comparison { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border-top: 1px solid var(--line); }
+    .scenario { min-height: 230px; padding: 22px 20px 20px 0; border-right: 1px solid var(--line); color: var(--muted); text-align: left; cursor: pointer; }
+    .scenario + .scenario { padding-left: 20px; }
+    .scenario:last-child { border-right: 0; }
+    .scenario[aria-pressed="true"] { color: var(--text); }
+    .scenario:focus-visible { outline: 1px solid var(--text); outline-offset: -1px; }
+    .scenario strong { display: block; color: inherit; font-size: clamp(35px, 5vw, 66px); font-weight: 900; letter-spacing: -.09em; line-height: .86; }
+    .scenario em { display: block; margin-top: 16px; color: inherit; font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .scenario small { display: block; margin-top: 22px; color: var(--muted); font-size: 12px; font-weight: 700; line-height: 1.55; text-transform: uppercase; }
+    .scenario[aria-pressed="true"]::after { content: "RECOMENDADO"; display: inline-block; margin-top: 18px; padding: 7px 9px; background: var(--text); color: var(--bg); font-size: 10px; font-weight: 900; letter-spacing: .12em; }
+    .selected-detail { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--soft-line); }
+    .selected-detail strong { display: block; font-size: 29px; letter-spacing: -.07em; }
+    .selected-detail span { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .1em; line-height: 1.35; text-transform: uppercase; }
+    .roi-output { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 15px; margin-top: 30px; }
+    .roi-box { min-height: 122px; padding: 17px; border: 1px solid var(--soft-line); background: rgba(255,255,255,.025); }
+    .roi-box b { display: block; font-size: clamp(26px, 3.5vw, 45px); letter-spacing: -.08em; line-height: .9; }
+    .roi-box span { display: block; margin-top: 13px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .1em; line-height: 1.35; text-transform: uppercase; }
+    .roi-lead { max-width: 780px; margin-top: 24px; color: var(--muted); font-size: 16px; font-weight: 600; line-height: 1.55; }
+    .roi-lead strong, .roi-explanation strong, .roi-success strong { color: var(--text); }
+    .roi-explanation { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 28px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .roi-explanation h3 { margin-bottom: 12px; }
+    .roi-explanation p { color: var(--muted); font-size: 14px; font-weight: 600; line-height: 1.6; }
+    .roi-success { display: grid; grid-template-columns: minmax(150px,.45fr) minmax(0,1fr); gap: 24px; align-items: center; margin-top: 28px; padding: 20px 0 0; border-top: 2px solid var(--text); }
+    .roi-success > span { color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    .roi-success strong { display: block; font-size: clamp(21px, 3vw, 35px); letter-spacing: -.06em; line-height: 1; }
+    .roi-success p { margin-top: 9px; color: var(--muted); font-size: 13px; font-weight: 600; line-height: 1.55; }
+    .flow { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid var(--line); }
+    .flow-step { min-height: 174px; padding: 22px 20px 22px 0; border-right: 1px solid var(--line); }
+    .flow-step + .flow-step { padding-left: 20px; }
+    .flow-step:last-child { border-right: 0; }
+    .flow-step b { display: block; color: var(--muted); font-size: 12px; letter-spacing: .1em; }
+    .flow-step em { display: block; margin-top: 26px; font-size: 20px; font-style: normal; font-weight: 800; letter-spacing: -.05em; text-transform: uppercase; }
+    .flow-step span { display: block; margin-top: 10px; color: var(--muted); font-size: 12px; font-weight: 700; line-height: 1.5; text-transform: uppercase; }
+    .rules { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 34px; border-top: 1px solid var(--line); }
+    .rule { padding: 18px 0; border-bottom: 1px solid var(--soft-line); color: var(--muted); font-size: 14px; font-weight: 600; line-height: 1.55; }
+    .rule strong { color: var(--text); }
+    .pilot { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 0 0; }
+    .pilot strong { font-size: clamp(25px, 4vw, 48px); letter-spacing: -.08em; text-transform: uppercase; }
+    .pilot span { max-width: 430px; color: var(--muted); font-size: 13px; font-weight: 600; line-height: 1.55; text-align: right; }
+    .change-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+    .change-card { min-height: 170px; padding: 20px; border: 1px solid var(--soft-line); background: linear-gradient(135deg, rgba(199,247,223,.08), rgba(255,255,255,.02)); }
+    .change-card b { display: block; color: var(--green); font-size: clamp(30px, 4vw, 52px); letter-spacing: -.09em; line-height: .9; }
+    .change-card strong { display: block; margin-top: 18px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    .change-card span { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; font-weight: 600; line-height: 1.5; }
+    .status { display: inline-flex; align-items: center; min-height: 24px; margin-bottom: 18px; padding: 0 9px; border: 1px solid rgba(199,247,223,.45); color: var(--green); font-size: 10px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .note { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--soft-line); color: var(--muted); font-size: 12px; font-weight: 600; line-height: 1.55; }
+    .note strong { color: var(--text); }
+    .pending { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.025); }
+    .pending b { color: var(--text); font-size: clamp(24px, 3vw, 38px); }
+    .decision { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 30px; align-items: center; }
+    .decision h3 { margin-bottom: 12px; }
+    .decision p { color: var(--muted); font-size: 14px; font-weight: 600; line-height: 1.6; }
+    .decision-options { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .decision-option { min-height: 118px; padding: 18px; border-top: 2px solid var(--text); background: rgba(255,255,255,.025); }
+    .decision-option b { display: block; font-size: 34px; letter-spacing: -.08em; }
+    .decision-option span { display: block; margin-top: 10px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .08em; line-height: 1.35; text-transform: uppercase; }
+    footer { padding-top: 24px; color: var(--dim); font-size: 10px; font-weight: 700; letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; }
+    @media (max-width: 920px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } .split { grid-template-columns: 1fr; } }
+    @media (max-width: 700px) { main { padding: 22px 20px 48px; } .topbar { font-size: 10px; } .hero { min-height: 410px; } .hero::after { font-size: 170px; bottom: 0; } .section-head { display: block; } .caption { margin-top: 16px; text-align: left; } .comparison, .flow, .rules, .roi-output, .roi-explanation, .roi-success, .change-grid, .decision, .decision-options { grid-template-columns: 1fr; } .scenario, .scenario + .scenario, .flow-step, .flow-step + .flow-step { padding-left: 0; border-right: 0; border-bottom: 1px solid var(--line); } .scenario:last-child, .flow-step:last-child { border-bottom: 0; } .selected-detail { grid-template-columns: 1fr 1fr 1fr; } .pilot { display: block; } .pilot span { display: block; margin-top: 13px; text-align: left; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <span class="brand"><img src="../logo-fitform-teal.png" alt="Fitform" /> Fitform</span>
+      <span>V2 / Temporada Rewards</span>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">Versión 2 · Campaña temporal de lealtad</div>
+      <h1>10 + <span>1</span></h1>
+      <p class="hero-copy">Paga. Asiste. Gana. Completa 10 clases pagadas y asistidas en 60 días. Recibe 1 clase gratis con 30 días para usarla.</p>
+      <div class="hero-actions"><a class="button" href="#cambios">Ver cambios</a><a class="button" href="#propuesta">Ver propuesta</a><a class="button" href="#roi">Ver ROI</a></div>
+    </header>
+
+    <section id="cambios">
+      <div class="section-head"><h2>Qué cambia</h2><p class="caption">La V2 conserva la mecánica 10 + 1, pero la convierte en una campaña acotada y medible.</p></div>
+      <div class="change-grid">
+        <div class="change-card"><b>90</b><strong>Temporada</strong><span>La campaña se activa por un periodo limitado; no es un beneficio permanente.</span></div>
+        <div class="change-card"><b>60</b><strong>Días para acumular</strong><span>Las 10 asistencias válidas deben completarse dentro de dos meses. Después, el conteo reinicia.</span></div>
+        <div class="change-card"><b>30</b><strong>Días para redimir</strong><span>Una vez liberada, la clase gratis queda disponible por 30 días y depende del cupo normal.</span></div>
+      </div>
+      <p class="note"><strong>Posicionamiento:</strong> comunicarlo como una experiencia exclusiva de temporada, no como un descuento recurrente.</p>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Lo que sabemos</h2><p class="caption">Base histórica V1: mayo–septiembre de 2026. Incluye clases regulares, no membresías; la V2 deberá validarse con asistencias de Bsport.</p></div>
+      <div class="kpis">
+        <div class="metric"><b>255</b><span>Clientes con compra<br />de clases</span></div>
+        <div class="metric"><b>2,052</b><span>Clases compradas<br />en el periodo</span></div>
+        <div class="metric"><b>27%</b><span>Habría llegado<br />a 10 clases</span></div>
+        <div class="metric"><b>$387</b><span>Ingreso neto promedio<br />por clase pagada</span></div>
+      </div>
+    </section>
+
+    <section id="propuesta">
+      <div class="section-head"><h2>La meta</h2><p class="caption">La propuesta base V2 es 10 + 1 dentro de una ventana de 60 días. Las otras opciones quedan como referencia.</p></div>
+      <div class="comparison" role="group" aria-label="Metas de recompensas">
+        <button class="scenario" type="button" data-threshold="10" aria-pressed="true"><strong>10 + 1</strong><em>Base V2</em><small>10 clases en 60 días<br />27% llega a la meta histórica</small></button>
+        <button class="scenario" type="button" data-threshold="20" aria-pressed="false"><strong>20 + 1</strong><em>Referencia</em><small>Menor exposición<br />12% llega a la meta histórica</small></button>
+        <button class="scenario" type="button" data-threshold="30" aria-pressed="false"><strong>30 + 1</strong><em>Referencia</em><small>Meta más distante<br />5% llega a la meta histórica</small></button>
+      </div>
+      <div class="selected-detail" aria-live="polite">
+        <div><strong id="eligible">69</strong><span>Clientes que llegarían</span></div>
+        <div><strong id="rewards">123</strong><span>Recompensas potenciales</span></div>
+        <div><strong id="listValue">$51.7K</strong><span>Valor comercial máximo<br />de clases gratis</span></div>
+      </div>
+      <p class="note"><strong>Lectura correcta:</strong> estas cifras son una referencia histórica de compras. La implementación V2 debe recalcular elegibilidad con clases pagadas y asistencias confirmadas dentro de cada ventana de 60 días.</p>
+    </section>
+
+    <section id="roi">
+      <div class="section-head"><h2>ROI estimado</h2><p class="caption">Se conserva la referencia económica de la V1 y se añade el corte operativo de la nueva temporada de 90 días.</p></div>
+      <div class="roi-output">
+        <div class="roi-box"><b>$18.5K</b><span>Costo operativo<br />estimado V1</span></div>
+        <div class="roi-box"><b>90 días</b><span>Duración de la<br />temporada V2</span></div>
+        <div class="roi-box"><b>2,052</b><span>Clases compradas<br />en la base histórica</span></div>
+      </div>
+      <p class="roi-lead"><strong>La lógica:</strong> Fitform regala algunas clases para motivar más compras y asistencias. El programa funciona cuando el margen de las clases adicionales supera el costo operativo de las recompensas.</p>
+      <div class="roi-explanation">
+        <div><h3>Qué significa $51.7K</h3><p>Es el valor público máximo de 123 clases gratis: 123 × $420. No es dinero que Fitform tenga que pagar. Con 60% de redención y un costo operativo estimado de $250 por clase, la inversión esperada es de $18.5K.</p></div>
+        <div><h3>¿Adicionales a qué?</h3><p>Son adicionales a las 2,052 clases compradas en el periodo de referencia. Por eso, la V1 estimaba 2,188 clases totales para recuperar la inversión: 2,052 + 136. En la V2, este corte debe recalcularse al cierre de la temporada con asistencias reales.</p></div>
+      </div>
+      <div class="roi-success"><span>Éxito V2</span><div><strong>Medir crecimiento dentro de 90 días.</strong><p>Usar 2,052 como referencia histórica, pero evaluar la temporada con clases pagadas y asistidas, tasa de redención, recompra, margen incremental y ocupación.</p></div></div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Cómo funciona</h2><p class="caption">La ventana de acumulación y la vigencia de redención quedan separadas.</p></div>
+      <div class="flow">
+        <div class="flow-step"><b>01</b><em>Compra</em><span>Clase individual o paquete regular.</span></div>
+        <div class="flow-step"><b>02</b><em>Asiste</em><span>La asistencia queda confirmada.</span></div>
+        <div class="flow-step"><b>03</b><em>Acumula</em><span>Completa 10 asistencias válidas en 60 días.</span></div>
+        <div class="flow-step"><b>04</b><em>Redime</em><span>Recibe un crédito y úsalo en los siguientes 30 días.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Reglas</h2><p class="caption">Condiciones V2 para proteger margen, operación y claridad para el cliente.</p></div>
+      <div class="rules">
+        <div class="rule"><strong>Cuenta:</strong> clases pagadas de productos regulares y con asistencia confirmada.</div>
+        <div class="rule"><strong>No cuenta:</strong> reservas canceladas, no-shows, clases muestra o clases gratis.</div>
+        <div class="rule"><strong>Acumulación:</strong> las 10 clases deben completarse en 60 días; si no, el conteo reinicia.</div>
+        <div class="rule"><strong>Redención:</strong> la recompensa vence 30 días después de ser liberada.</div>
+        <div class="rule"><strong>Temporada:</strong> la campaña dura 90 días y no queda activa todo el año.</div>
+        <div class="rule"><strong>Disponibilidad:</strong> sujeta a cupo, especialmente en horarios de alta demanda.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Membresías</h2><p class="caption">Decisión pendiente antes de publicar las reglas finales.</p></div>
+      <div class="decision">
+        <div><span class="status">Por definir</span><h3>No entran al 10 + 1 base</h3><p>La propuesta principal aplica a clases individuales y paquetes regulares. Para membresías se planteó una meta diferenciada, porque su costo por clase ya es menor.</p></div>
+        <div class="decision-options">
+          <div class="decision-option pending"><b>20 + 1</b><span>Opción sugerida para membresías de 8 o 12 clases</span></div>
+          <div class="decision-option pending"><b>30 + 1</b><span>Opción de mayor volumen; falta validar ilimitadas</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>Piloto V2</h2><p class="caption">Antes de anunciar, Bsport debe confirmar que puede identificar la meta y reiniciar ventanas correctamente.</p></div>
+      <div class="pilot"><strong>90 días</strong><span>Configurar el conteo de 60 días, liberar el crédito al llegar a 10 asistencias y medir su uso durante 30 días.</span></div>
+    </section>
+
+    <footer>Fitform Rewards · V2 · Campaña temporal · Base histórica de compras: mayo–septiembre 2026</footer>
+  </main>
+
+  <script>
+    const scenarios = {
+      10: { eligible: 69, rewards: 123, list: 51660 },
+      20: { eligible: 30, rewards: 38, list: 15960 },
+      30: { eligible: 13, rewards: 15, list: 6300 }
+    };
+    let threshold = 10;
+    const money = value => '$' + (value >= 1000 ? (value / 1000).toFixed(1) + 'K' : Math.round(value).toLocaleString('es-MX'));
+    const byId = id => document.getElementById(id);
+    const setScenario = value => {
+      threshold = Number(value);
+      document.querySelectorAll('.scenario').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.threshold) === threshold)));
+      const selected = scenarios[threshold];
+      byId('eligible').textContent = selected.eligible.toLocaleString('es-MX');
+      byId('rewards').textContent = selected.rewards.toLocaleString('es-MX');
+      byId('listValue').textContent = money(selected.list);
+    };
+    document.querySelectorAll('.scenario').forEach(button => button.addEventListener('click', () => setScenario(button.dataset.threshold)));
+  </script>
+</body>
+</html>
